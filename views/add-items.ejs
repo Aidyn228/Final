@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Item</title>
+</head>
+<body>
+    <div id="itemContainer">
+        <% items.forEach(item => { %>
+          <div class="item">
+            <h3><%= item.name %></h3>
+            <p><%= item.description %></p>
+            <p>Timestamp: <%= item.timestamp %></p>
+            
+            <!-- Carousel with 3 pictures (adjust the paths accordingly) -->
+            <div id="carousel">
+              <img src="<%= item.picture1 %>" alt="Picture 1">
+              <img src="<%= item.picture2 %>" alt="Picture 2">
+              <img src="<%= item.picture3 %>" alt="Picture 3">
+            </div>
+          </div>
+        <% }) %>
+      </div>
+  <h1>Add Item</h1>
+
+  <!-- Add Item Form -->
+  <form action="/add-item" method="post">
+      <label for="itemName">Name:</label>
+      <input type="text" id="itemName" name="name" required>
+
+      <label for="itemDescription">Description:</label>
+      <textarea id="itemDescription" name="description" required></textarea>
+
+      <label for="itemPicture1">Picture 1 URL:</label>
+      <input type="text" id="itemPicture1" name="picture1" required>
+
+      <label for="itemPicture2">Picture 2 URL:</label>
+      <input type="text" id="itemPicture2" name="picture2" required>
+
+      <label for="itemPicture3">Picture 3 URL:</label>
+      <input type="text" id="itemPicture3" name="picture3" required>
+
+      <button type="submit">Add Item</button>
+  </form>
+
+  <form action="/edit-item" method="post">
+    <label for="itemName">Name:</label>
+    <input type="text" id="itemName" name="name" required>
+
+    <label for="itemDescription">Description:</label>
+    <textarea id="itemDescription" name="description" required></textarea>
+
+    <label for="itemPicture1">Picture 1 URL:</label>
+    <input type="text" id="itemPicture1" name="picture1" required>
+
+    <label for="itemPicture2">Picture 2 URL:</label>
+    <input type="text" id="itemPicture2" name="picture2" required>
+
+    <label for="itemPicture3">Picture 3 URL:</label>
+    <input type="text" id="itemPicture3" name="picture3" required>
+
+    <label for="itemPicture3">Item ID</label>
+    <input type="text" id="itemPicture3" name="ItemID" required>
+
+    <button type="submit">Edit Item</button>
+</form>
+
+<form action="/delete-item" method="post">
+    <label for="itemPicture3">Item ID</label>
+    <input type="text" id="itemPicture3" name="ItemIDD" required>
+
+    <button type="submit">Delete Item</button>
+</form>
+
+</body>
+</html>

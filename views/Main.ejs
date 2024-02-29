@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/>
+    <style>
+      /* Custom styles for the carousel */
+      .carousel {
+        text-align: center;
+        max-width: 50%;
+        max-height: 50%; /* Set the maximum height as needed */
+      }
+
+      .carousel img {
+        max-width: 50%;
+        max-height: 50%; /* Set the maximum height as needed */
+        display: inline-block;
+        margin: 0 auto;
+      }
+      .navbar {
+  width: 100%;
+  background-color: #555;
+  overflow: auto;
+}
+
+.navbar a {
+  float: left;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.navbar a:hover {
+  background-color: #000;
+}
+
+.active {
+  background-color: #04AA6D;
+}
+
+@media screen and (max-width: 500px) {
+  .navbar a {
+    float: none;
+    display: block;
+  }
+}
+    </style>
+</head>
+<body>
+  <div class="navbar">
+    <a class="active" href="/main">Home</a> 
+    <a href="/api1">GDP</a> 
+    <a href="/api2"></i>Wikipedia</a> 
+    <a href="/api3"></i>News</a>
+  </div>
+
+  <!-- Display items with carousel -->
+  <div id="itemContainer">
+    <% items.forEach(item => { %>
+      <div class="item">
+        <h3><%= item.name %></h3>
+        <p><%= item.description %></p>
+        <p>Timestamp: <%= item.timestamp %></p>
+        
+        <!-- Carousel with rotating pictures -->
+        <div class="carousel">
+          <img src="<%= item.picture1 %>" alt="Picture 1">
+          <img src="<%= item.picture2 %>" alt="Picture 2">
+          <img src="<%= item.picture3 %>" alt="Picture 3">
+        </div>
+      </div>
+    <% }) %>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
+
+  <!-- Initialize the carousel -->
+  <script>
+    $(document).ready(function(){
+      $('.carousel').slick({
+        autoplay: true,
+        autoplaySpeed: 3000, // Change the speed (in milliseconds) as needed
+      });
+    });
+  </script>
+</body>
+</html>

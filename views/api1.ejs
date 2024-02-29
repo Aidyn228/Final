@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Bank Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #countryInput {
+            margin-bottom: 10px;
+        }
+
+        #economicContainer {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>World Bank Data</h1>
+
+    <label for="countryInput">Select Country Code:</label>
+    <input type="text" id="countryInput" placeholder="e.g., USA">
+    <button onclick="getCountryData()">Get GDP Data</button>
+
+    <div id="economicContainer">
+        <h2>GDP Data</h2>
+        <p id="gdpInfo"></p>
+    </div>
+
+    <script>
+  function getCountryData() {
+    const countryInput = document.getElementById("countryInput").value;
+
+    // Fetch GDP data using World Bank Data API
+    fetch(`https://api.worldbank.org/v2/country/${countryInput}/indicator/NY.GDP.MKTP.CD?format=json`)
+        .then(response => response.json())
+        .then(data => {
+            const gdpData = extractGDPData(data);
+            displayGDPInfo(gdpData, countryInput);
+        })
+        .catch(error => console.error('Error fetching GDP data:', error));
+}
+
+function extractGDPData(data) {
+    // Extract relevant GDP data
+    const gdpIndicator = data[1][0];
+    const gdpValue = gdpIndicator.value;
+    const gdpName = gdpIndicator.country.value;
+    return {
+        value: gdpValue,
+        name: gdpName
+    };
+}
+
+function displayGDPInfo(gdpData, country) {
+    const gdpInfoElement = document.getElementById("gdpInfo");
+    
+    if (gdpData.value) {
+        const info = `GDP Value for ${gdpData.name}: ${gdpData.value.toFixed(2)} USD<br>
+                      `;
+
+        gdpInfoElement.innerHTML = info;
+    } else {
+        gdpInfoElement.textContent = `No GDP data available for ${country}.`;
+    }
+}
+    </script>
+</body>
+</html>
